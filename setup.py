@@ -50,13 +50,13 @@ if platform.python_implementation() == 'CPython':
                                  **kwargs: Any) -> Command:
             if name == build_ext.__name__:
                 kwargs.setdefault('debug', 1)
-            command = super().reinitialize_command(name, reinit_subcommands,
-                                                   **kwargs)
+            result = super().reinitialize_command(name, reinit_subcommands,
+                                                  **kwargs)
             if name == build_ext.__name__:
-                command.ensure_finalized()
-                for extension in command.extensions:
+                result.ensure_finalized()
+                for extension in result.extensions:
                     extension.undef_macros.append(('NDEBUG',))
-            return command
+            return result
 
 
     parameters.update(cmdclass={develop.__name__: Develop},
