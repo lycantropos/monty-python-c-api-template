@@ -52,11 +52,13 @@ jobs:
       - name: 'Upload PyPy coverage'
         uses: codecov/codecov-action@v2.1.0
         with:
+          fail_ci_if_error: false
           files: ./coverage.xml
         if: ${{ '{{ startsWith(matrix.python_version, \'pypy\') }}' }}
       - name: 'Upload СPython coverage'
         uses: codecov/codecov-action@v2.1.0
         with:
+          fail_ci_if_error: false
           files: ./coverage.xml,./coverage_c.xml
         if: ${{ '{{ !startsWith(matrix.python_version, \'pypy\') }}' }}
 
