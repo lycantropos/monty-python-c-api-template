@@ -12,6 +12,7 @@ on:
 jobs:
   test:
     name: 'Test'
+    runs-on: ${{ '{{ matrix.os }}' }}
     strategy:
       matrix:
         python_version: ['3.{{ range(min_python_version.split('.')[1]|int, (max_python_version.split('.')[1])|int + 1) | join('\', \'3.') }}']
@@ -40,7 +41,6 @@ jobs:
             platform: { os: 'ubuntu-latest', python_architecture: 'x64' }
           - python_version: 'pypy-{{ min_python_version.split('.')[:2] | join('.') }}'
             platform: { os: 'windows-latest', python_architecture: 'x64' }
-    runs-on: ${{ '{{ matrix.os }}' }}
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v3
