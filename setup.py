@@ -41,6 +41,7 @@ if platform.python_implementation() == 'CPython':
 
     from setuptools import (Command,
                             Extension)
+    from setuptools.command.build_ext import build_ext
     from setuptools.command.develop import develop
 
     class Develop(develop):
