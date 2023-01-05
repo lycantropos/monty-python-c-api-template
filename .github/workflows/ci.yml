@@ -35,12 +35,14 @@ jobs:
           },
         ]
         include:
-          - python_version: 'pypy-{{ min_version_of['python'].split('.')[:2] | join('.') }}'
+{% for minor in range(min_version_of['pypy'].split('.')[1]|int, (max_version_of['pypy'].split('.')[1])|int + 1) %}
+          - python_version: 'pypy-{{ min_version_of['pypy'].split('.')[0] }}.{{ minor }}'
             platform: { os: 'macos-latest', python_architecture: 'x64' }
-          - python_version: 'pypy-{{ min_version_of['python'].split('.')[:2] | join('.') }}'
+          - python_version: 'pypy-{{ min_version_of['pypy'].split('.')[0] }}.{{ minor }}'
             platform: { os: 'ubuntu-latest', python_architecture: 'x64' }
-          - python_version: 'pypy-{{ min_version_of['python'].split('.')[:2] | join('.') }}'
+          - python_version: 'pypy-{{ min_version_of['pypy'].split('.')[0] }}.{{ minor }}'
             platform: { os: 'windows-latest', python_architecture: 'x64' }
+{% endfor %}
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v3
@@ -52,7 +54,7 @@ jobs:
           python-version: ${{ '{{ matrix.python_version }}' }}
           architecture: ${{ '{{ matrix.platform.python_architecture }}' }}
       - name: 'Install packaging tools'
-        run: python -m pip install -U pip setuptools
+        run: python -m pip install -U pip setuptools wheel
       - name: 'Install Mypy'
         run: python -m pip install -U mypy
         if: ${{ '{{ !startsWith(matrix.python_version, \'pypy\') }}' }}
@@ -276,12 +278,14 @@ jobs:
           },
         ]
         include:
-          - python_version: 'pypy-{{ min_version_of['python'].split('.')[:2] | join('.') }}'
+{% for minor in range(min_version_of['pypy'].split('.')[1]|int, (max_version_of['pypy'].split('.')[1])|int + 1) %}
+          - python_version: 'pypy-{{ min_version_of['pypy'].split('.')[0] }}.{{ minor }}'
             platform: { os: 'macos-latest', python_architecture: 'x64' }
-          - python_version: 'pypy-{{ min_version_of['python'].split('.')[:2] | join('.') }}'
+          - python_version: 'pypy-{{ min_version_of['pypy'].split('.')[0] }}.{{ minor }}'
             platform: { os: 'ubuntu-latest', python_architecture: 'x64' }
-          - python_version: 'pypy-{{ min_version_of['python'].split('.')[:2] | join('.') }}'
+          - python_version: 'pypy-{{ min_version_of['pypy'].split('.')[0] }}.{{ minor }}'
             platform: { os: 'windows-latest', python_architecture: 'x64' }
+{% endfor %}
     steps:
       - name: 'Setup Python'
         uses: actions/setup-python@v2

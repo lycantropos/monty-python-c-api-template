@@ -6,8 +6,8 @@
 [![](https://img.shields.io/github/license/{{github_login}}/{{project}}.svg)](https://github.com/{{github_login}}/{{project}}/blob/master/LICENSE "License")
 [![](https://badge.fury.io/py/{{project.replace("_", "-")}}.svg)](https://badge.fury.io/py/{{project.replace("_", "-")}} "PyPI")
 
-In what follows `python` is an alias for `python{{min_version_of['python']}}` or `pypy{{min_version_of['python']}}`
-or any later version (`python{{min_version_of['python'].split('.')[0]}}.{{min_version_of['python'].split('.')[1]|int + 1}}`, `pypy{{min_version_of['python'].split('.')[0]}}.{{min_version_of['python'].split('.')[1]|int + 1}}` and so on).
+In what follows `python` is an alias for `python{{min_version_of['python']}}` or `pypy{{min_version_of['pypy']}}`
+or any later version (`python{{min_version_of['python'].split('.')[0]}}.{{min_version_of['python'].split('.')[1]|int + 1}}`, `pypy{{min_version_of['pypy'].split('.')[0]}}.{{min_version_of['pypy'].split('.')[1]|int + 1}}` and so on).
 
 Installation
 ------------
@@ -30,6 +30,11 @@ Download the latest version from `GitHub` repository
 ```bash
 git clone https://github.com/{{github_login}}/{{project}}.git
 cd {{project}}
+```
+
+Install dependencies
+```bash
+python -m pip install -r requirements.txt
 ```
 
 Install
